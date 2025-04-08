@@ -3,65 +3,66 @@
 namespace Fractas\ElementalStylings;
 
 use Fractas\ElementalStylings\Forms\StylingOptionsetField;
-use SilverStripe\Forms\DropdownField;
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 
-class StylingHeight extends \SilverStripe\Core\Extension
+
+class StylingHeight extends Extension
 {
-    private static $db = [
+    private static array $db = [
         'Height' => 'Varchar(255)',
     ];
 
     /**
      * @var string
      */
-    private static $singular_name = 'Height';
+    private static string $singular_name = 'Height';
 
     /**
      * @var string
      */
-    private static $plural_name = 'Heights';
+    private static string $plural_name = 'Heights';
 
     /**
      * @config
      *
      * @var array
      */
-    private static $height = [];
+    private static array $height = [];
 
-    public function getStylingHeightNice($key)
+    public function getStylingHeightNice(string $key): string
     {
         return (empty($this->getOwner()->config()->get('height')[$key])) ? $key : $this->getOwner()->config()->get('height')[$key];
     }
 
-    public function getStylingHeightData()
+    public function getStylingHeightData(): ArrayData
     {
-        return \SilverStripe\Model\ArrayData::create([
-           'Label' => self::$singular_name,
-           'Value' => $this->getStylingHeightNice($this->getOwner()->Height),
-       ]);
+        return ArrayData::create([
+            'Label' => self::$singular_name,
+            'Value' => $this->getStylingHeightNice($this->getOwner()->Height),
+        ]);
     }
 
     /**
      * @return string
      */
-    public function getHeightVariant()
+    public function getHeightVariant(): string
     {
         $height = $this->getOwner()->Height;
         $heights = $this->getOwner()->config()->get('height');
 
         $height = isset($heights[$height]) ? strtolower($height) : '';
 
-        return 'height-'.$height;
+        return 'height-' . $height;
     }
 
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): FieldList
     {
         $height = $this->getOwner()->config()->get('height');
         if ($height && count($height) > 1) {
-            $fields->addFieldsToTab('Root.Styling', StylingOptionsetField::create('Height', _t(self::class.'.HEIGHT', 'Height Size'), $height));
+            $fields->addFieldsToTab('Root.Styling',
+                StylingOptionsetField::create('Height', _t(self::class . '.HEIGHT', 'Height Size'), $height));
         } else {
             $fields->removeByName('Height');
         }
@@ -69,7 +70,7 @@ class StylingHeight extends \SilverStripe\Core\Extension
         return $fields;
     }
 
-    public function populateDefaults()
+    public function populateDefaults(): void
     {
         $height = $this->getOwner()->config()->get('height');
         $height = reset($height);

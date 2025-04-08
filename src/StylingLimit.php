@@ -2,42 +2,42 @@
 
 namespace Fractas\ElementalStylings;
 
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 
-class StylingLimit extends \SilverStripe\Core\Extension
+class StylingLimit extends Extension
 {
-    private static $db = [
+    private static array $db = [
         'Limit' => 'Varchar(255)',
     ];
 
     /**
      * @var string
      */
-    private static $singular_name = 'Limit';
+    private static string $singular_name = 'Limit';
 
     /**
      * @var string
      */
-    private static $plural_name = 'Limits';
+    private static string $plural_name = 'Limits';
 
     /**
      * @config
      *
      * @var array
      */
-    private static $limit = [];
+    private static array $limit = [];
 
     public function getStylingLimitNice($key)
     {
         return (empty($this->getOwner()->config()->get('limit')[$key])) ? $key : $this->getOwner()->config()->get('limit')[$key];
     }
 
-    public function getStylingLimitData()
+    public function getStylingLimitData(): ArrayData
     {
-        return \SilverStripe\Model\ArrayData::create([
+        return ArrayData::create([
            'Label' => self::$singular_name,
            'Value' => $this->getStylingLimitNice($this->getOwner()->Limit),
        ]);
@@ -46,7 +46,7 @@ class StylingLimit extends \SilverStripe\Core\Extension
     /**
      * @return string
      */
-    public function getLimitVariant()
+    public function getLimitVariant(): string
     {
         $limit = $this->getOwner()->Limit;
         $limits = $this->getOwner()->config()->get('limit');
@@ -56,7 +56,7 @@ class StylingLimit extends \SilverStripe\Core\Extension
         return 'limit-'.$limit;
     }
 
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): FieldList
     {
         $limit = $this->getOwner()->config()->get('limit');
         if ($limit && count($limit) > 1) {
@@ -68,7 +68,7 @@ class StylingLimit extends \SilverStripe\Core\Extension
         return $fields;
     }
 
-    public function populateDefaults()
+    public function populateDefaults(): void
     {
         $limit = $this->getOwner()->config()->get('limit');
         $limit = reset($limit);

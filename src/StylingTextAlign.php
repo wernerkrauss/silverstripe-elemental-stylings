@@ -3,41 +3,42 @@
 namespace Fractas\ElementalStylings;
 
 use Fractas\ElementalStylings\Forms\StylingOptionsetField;
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 
-class StylingTextAlign extends \SilverStripe\Core\Extension
+
+class StylingTextAlign extends Extension
 {
-    private static $db = [
+    private static array $db = [
         'TextAlign' => 'Varchar(255)',
     ];
 
     /**
      * @var string
      */
-    private static $singular_name = 'Text Align';
+    private static string $singular_name = 'Text Align';
 
     /**
      * @var string
      */
-    private static $plural_name = 'Text Aligns';
+    private static string $plural_name = 'Text Aligns';
 
     /**
      * @config
      *
      * @var array
      */
-    private static $textalign = [];
+    private static array $textalign = [];
 
-    public function getStylingTextAlignNice($key)
+    public function getStylingTextAlignNice(string $key):string
     {
         return (empty($this->getOwner()->config()->get('textalign')[$key])) ? $key : $this->getOwner()->config()->get('textalign')[$key];
     }
 
-    public function getStylingTextAlignData()
+    public function getStylingTextAlignData(): ArrayData
     {
-        return \SilverStripe\Model\ArrayData::create([
+        return ArrayData::create([
                'Label' => self::$singular_name,
                'Value' => $this->getStylingTextAlignNice($this->getOwner()->TextAlign),
            ]);
@@ -46,7 +47,7 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
     /**
      * @return string
      */
-    public function getTextAlignVariant()
+    public function getTextAlignVariant(): string
     {
         $textalign = $this->getOwner()->TextAlign;
         $textaligns = $this->getOwner()->config()->get('textalign');
@@ -56,7 +57,7 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
         return 'textalign-'.$textalign;
     }
 
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): FieldList
     {
         $fields->removeByName('TextAlign');
         $textalign = $this->getOwner()->config()->get('textalign');
@@ -70,7 +71,7 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
         return $fields;
     }
 
-    public function populateDefaults()
+    public function populateDefaults(): void
     {
         $textalign = $this->getOwner()->config()->get('textalign');
         $textalign = key($textalign);

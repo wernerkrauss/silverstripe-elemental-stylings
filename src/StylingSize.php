@@ -2,65 +2,67 @@
 
 namespace Fractas\ElementalStylings;
 
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 
-class StylingSize extends \SilverStripe\Core\Extension
+
+class StylingSize extends Extension
 {
-    private static $db = [
+    private static array $db = [
         'Size' => 'Varchar(255)',
     ];
 
     /**
      * @var string
      */
-    private static $singular_name = 'Size';
+    private static string $singular_name = 'Size';
 
     /**
      * @var string
      */
-    private static $plural_name = 'Sizes';
+    private static string $plural_name = 'Sizes';
 
     /**
      * @config
      *
      * @var array
      */
-    private static $size = [];
+    private static array $size = [];
 
-    public function getStylingSizeNice($key)
+    public function getStylingSizeNice(string $key): string
     {
         return (empty($this->getOwner()->config()->get('size')[$key])) ? $key : $this->getOwner()->config()->get('size')[$key];
     }
 
-    public function getStylingSizeData()
+    public function getStylingSizeData(): ArrayData
     {
-        return \SilverStripe\Model\ArrayData::create([
-           'Label' => self::$singular_name,
-           'Value' => $this->getStylingSizeNice($this->getOwner()->Size),
-       ]);
+        return ArrayData::create([
+            'Label' => self::$singular_name,
+            'Value' => $this->getStylingSizeNice($this->getOwner()->Size),
+        ]);
     }
 
     /**
      * @return string
      */
-    public function getSizeVariant()
+    public function getSizeVariant(): string
     {
         $size = $this->getOwner()->Size;
         $sizes = $this->getOwner()->config()->get('size');
 
         $size = isset($sizes[$size]) ? strtolower($size) : '';
 
-        return 'size-'.$size;
+        return 'size-' . $size;
     }
 
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): FieldList
     {
         $size = $this->getOwner()->config()->get('size');
         if ($size && count($size) > 1) {
-            $fields->addFieldsToTab('Root.Styling', DropdownField::create('Size', _t(self::class.'.SIZE', 'Size'), $size));
+            $fields->addFieldsToTab('Root.Styling',
+                DropdownField::create('Size', _t(self::class . '.SIZE', 'Size'), $size));
         } else {
             $fields->removeByName('Size');
         }
@@ -68,7 +70,7 @@ class StylingSize extends \SilverStripe\Core\Extension
         return $fields;
     }
 
-    public function populateDefaults()
+    public function populateDefaults(): void
     {
         $size = $this->getOwner()->config()->get('size');
         $size = reset($size);

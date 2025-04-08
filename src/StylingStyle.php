@@ -2,67 +2,69 @@
 
 namespace Fractas\ElementalStylings;
 
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 
-class StylingStyle extends \SilverStripe\Core\Extension
+
+class StylingStyle extends Extension
 {
     /**
      * @var string
      */
-    private static $singular_name = 'Style';
+    private static string $singular_name = 'Style';
 
     /**
      * @var string
      */
-    private static $plural_name = 'Styles';
+    private static string $plural_name = 'Styles';
 
     /**
      * @config
      *
      * @var array
      */
-    private static $style = [];
+    private static array $style = [];
 
-    public function getStylingStyleNice($key)
+    public function getStylingStyleNice(string $key): string
     {
         return (empty($this->getOwner()->config()->get('styles')[$key])) ? $key : $this->getOwner()->config()->get('styles')[$key];
     }
 
-    public function getStylingStyleData()
+    public function getStylingStyleData(): ArrayData
     {
-        return \SilverStripe\Model\ArrayData::create([
-               'Label' => self::$singular_name,
-               'Value' => $this->getStylingStyleNice($this->getOwner()->Style),
-           ]);
+        return ArrayData::create([
+            'Label' => self::$singular_name,
+            'Value' => $this->getStylingStyleNice($this->getOwner()->Style),
+        ]);
     }
 
-    public function getStylingTitleData()
+    public function getStylingTitleData(): ArrayData
     {
-        return \SilverStripe\Model\ArrayData::create([
-               'Label' => 'Title',
-               'Value' => $this->getOwner()->obj('ShowTitle')->Nice(),
-           ]);
+        return ArrayData::create([
+            'Label' => 'Title',
+            'Value' => $this->getOwner()->obj('ShowTitle')->Nice(),
+        ]);
     }
 
     /**
      * @return string
      */
-    public function updateStyleVariant(&$style)
+    public function updateStyleVariant(&$style): string
     {
-        $style = isset($style) ? strtolower((string) $style) : '';
-        $style = 'style-'.$style;
+        $style = isset($style) ? strtolower((string)$style) : '';
+        $style = 'style-' . $style;
 
         return $style;
     }
 
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): FieldList
     {
         $style = $this->getOwner()->config()->get('styles');
         if ($style && count($style) > 1) {
-            $fields->addFieldsToTab('Root.Styling', DropdownField::create('Style', _t(self::class.'.STYLE', 'Style'), $style));
+            $fields->addFieldsToTab('Root.Styling',
+                DropdownField::create('Style', _t(self::class . '.STYLE', 'Style'), $style));
         } else {
             $fields->removeByName('Style');
         }
@@ -70,7 +72,7 @@ class StylingStyle extends \SilverStripe\Core\Extension
         return $fields;
     }
 
-    public function populateDefaults()
+    public function populateDefaults(): void
     {
         $style = $this->getOwner()->config()->get('styles');
         $style = array_key_first($style);

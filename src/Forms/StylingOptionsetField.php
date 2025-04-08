@@ -2,15 +2,17 @@
 
 namespace Fractas\ElementalStylings\Forms;
 
+use Override;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\ORM\ArrayList;
+use SilverStripe\Model\List\ArrayList;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\Requirements;
 
 class StylingOptionsetField extends OptionsetField
 {
-    #[\Override]
-    public function Field($properties = [])
+    #[Override]
+    public function Field($properties = []): DBHTMLText
     {
         $options = [];
         $odd = false;
@@ -21,7 +23,7 @@ class StylingOptionsetField extends OptionsetField
         }
 
         $properties = array_merge($properties, [
-            'Options' => new ArrayList($options),
+            'Options' => ArrayList::create($options),
         ]);
 
         Requirements::javascript('fractas/elemental-stylings:client/dist/js/StylingOptionsetField.js');
