@@ -24,9 +24,10 @@ The module provides basic markup for each of the stylings but you have an option
 
 ## Requirements
 
-* SilverStripe CMS ^4.0 || ^5.0
-* SilverStripe Elemental Blocks ^4.0 || ^5.0
+* SilverStripe CMS ^6.0
+* SilverStripe Elemental Blocks ^6.0
 
+For CMS 4.x and 5.x use version 1.x of this module.
 
 ## Installation
 
