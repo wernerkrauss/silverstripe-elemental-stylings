@@ -7,7 +7,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\ArrayData;
 
-class StylingVerticalAlign extends DataExtension
+class StylingVerticalAlign extends \SilverStripe\Core\Extension
 {
     private static $db = [
         'VerAlign' => 'Varchar(255)',

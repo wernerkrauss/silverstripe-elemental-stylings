@@ -7,7 +7,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\ArrayData;
 
-class StylingSize extends DataExtension
+class StylingSize extends \SilverStripe\Core\Extension
 {
     private static $db = [
         'Size' => 'Varchar(255)',

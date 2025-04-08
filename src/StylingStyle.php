@@ -7,7 +7,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\ArrayData;
 
-class StylingStyle extends DataExtension
+class StylingStyle extends \SilverStripe\Core\Extension
 {
     /**
      * @var string

@@ -8,7 +8,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\ArrayData;
 
-class StylingHeight extends DataExtension
+class StylingHeight extends \SilverStripe\Core\Extension
 {
     private static $db = [
         'Height' => 'Varchar(255)',

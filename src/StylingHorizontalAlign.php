@@ -7,7 +7,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\ArrayData;
 
-class StylingHorizontalAlign extends DataExtension
+class StylingHorizontalAlign extends \SilverStripe\Core\Extension
 {
     private static $db = [
         'HorAlign' => 'Varchar(255)',

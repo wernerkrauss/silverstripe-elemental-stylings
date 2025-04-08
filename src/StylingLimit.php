@@ -7,7 +7,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\ArrayData;
 
-class StylingLimit extends DataExtension
+class StylingLimit extends \SilverStripe\Core\Extension
 {
     private static $db = [
         'Limit' => 'Varchar(255)',
