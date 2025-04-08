@@ -28,14 +28,14 @@ class StylingStyle extends \SilverStripe\Core\Extension
 
     public function getStylingStyleNice($key)
     {
-        return (!empty($this->owner->config()->get('styles')[$key])) ? $this->owner->config()->get('styles')[$key] : $key;
+        return (!empty($this->getOwner()->config()->get('styles')[$key])) ? $this->getOwner()->config()->get('styles')[$key] : $key;
     }
 
     public function getStylingStyleData()
     {
         return \SilverStripe\Model\ArrayData::create([
                'Label' => self::$singular_name,
-               'Value' => $this->getStylingStyleNice($this->owner->Style),
+               'Value' => $this->getStylingStyleNice($this->getOwner()->Style),
            ]);
     }
 
@@ -43,7 +43,7 @@ class StylingStyle extends \SilverStripe\Core\Extension
     {
         return \SilverStripe\Model\ArrayData::create([
                'Label' => 'Title',
-               'Value' => $this->owner->obj('ShowTitle')->Nice(),
+               'Value' => $this->getOwner()->obj('ShowTitle')->Nice(),
            ]);
     }
 
@@ -64,7 +64,7 @@ class StylingStyle extends \SilverStripe\Core\Extension
 
     public function updateCMSFields(FieldList $fields)
     {
-        $style = $this->owner->config()->get('styles');
+        $style = $this->getOwner()->config()->get('styles');
         if ($style && count($style) > 1) {
             $fields->addFieldsToTab('Root.Styling', DropdownField::create('Style', _t(__CLASS__.'.STYLE', 'Style'), $style));
         } else {
@@ -76,10 +76,10 @@ class StylingStyle extends \SilverStripe\Core\Extension
 
     public function populateDefaults()
     {
-        $style = $this->owner->config()->get('styles');
+        $style = $this->getOwner()->config()->get('styles');
         $style = array_key_first($style);
 
-        $this->owner->Style = $style;
+        $this->getOwner()->Style = $style;
 
         parent::populateDefaults();
     }

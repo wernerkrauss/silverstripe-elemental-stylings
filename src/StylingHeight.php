@@ -33,14 +33,14 @@ class StylingHeight extends \SilverStripe\Core\Extension
 
     public function getStylingHeightNice($key)
     {
-        return (!empty($this->owner->config()->get('height')[$key])) ? $this->owner->config()->get('height')[$key] : $key;
+        return (!empty($this->getOwner()->config()->get('height')[$key])) ? $this->getOwner()->config()->get('height')[$key] : $key;
     }
 
     public function getStylingHeightData()
     {
         return \SilverStripe\Model\ArrayData::create([
            'Label' => self::$singular_name,
-           'Value' => $this->getStylingHeightNice($this->owner->Height),
+           'Value' => $this->getStylingHeightNice($this->getOwner()->Height),
        ]);
     }
 
@@ -49,8 +49,8 @@ class StylingHeight extends \SilverStripe\Core\Extension
      */
     public function getHeightVariant()
     {
-        $height = $this->owner->Height;
-        $heights = $this->owner->config()->get('height');
+        $height = $this->getOwner()->Height;
+        $heights = $this->getOwner()->config()->get('height');
 
         if (isset($heights[$height])) {
             $height = strtolower($height);
@@ -63,7 +63,7 @@ class StylingHeight extends \SilverStripe\Core\Extension
 
     public function updateCMSFields(FieldList $fields)
     {
-        $height = $this->owner->config()->get('height');
+        $height = $this->getOwner()->config()->get('height');
         if ($height && count($height) > 1) {
             $fields->addFieldsToTab('Root.Styling', StylingOptionsetField::create('Height', _t(__CLASS__.'.HEIGHT', 'Height Size'), $height));
         } else {
@@ -75,10 +75,10 @@ class StylingHeight extends \SilverStripe\Core\Extension
 
     public function populateDefaults()
     {
-        $height = $this->owner->config()->get('height');
+        $height = $this->getOwner()->config()->get('height');
         $height = reset($height);
 
-        $this->owner->Height = $height;
+        $this->getOwner()->Height = $height;
 
         parent::populateDefaults();
     }

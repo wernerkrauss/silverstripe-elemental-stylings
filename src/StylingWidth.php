@@ -33,14 +33,14 @@ class StylingWidth extends \SilverStripe\Core\Extension
 
     public function getStylingWidthNice($key)
     {
-        return (!empty($this->owner->config()->get('width')[$key])) ? $this->owner->config()->get('width')[$key] : $key;
+        return (!empty($this->getOwner()->config()->get('width')[$key])) ? $this->getOwner()->config()->get('width')[$key] : $key;
     }
 
     public function getStylingWidthData()
     {
         return \SilverStripe\Model\ArrayData::create([
            'Label' => self::$singular_name,
-           'Value' => $this->getStylingWidthNice($this->owner->Width),
+           'Value' => $this->getStylingWidthNice($this->getOwner()->Width),
        ]);
     }
 
@@ -49,8 +49,8 @@ class StylingWidth extends \SilverStripe\Core\Extension
      */
     public function getWidthVariant()
     {
-        $width = $this->owner->Width;
-        $widths = $this->owner->config()->get('width');
+        $width = $this->getOwner()->Width;
+        $widths = $this->getOwner()->config()->get('width');
 
         if (isset($widths[$width])) {
             $width = strtolower($width);
@@ -63,7 +63,7 @@ class StylingWidth extends \SilverStripe\Core\Extension
 
     public function updateCMSFields(FieldList $fields)
     {
-        $width = $this->owner->config()->get('width');
+        $width = $this->getOwner()->config()->get('width');
         if ($width && count($width) > 1) {
             $fields->addFieldsToTab('Root.Styling', StylingOptionsetField::create('Width', _t(__CLASS__.'.WIDTH', 'Width Size'), $width));
         } else {
@@ -75,10 +75,10 @@ class StylingWidth extends \SilverStripe\Core\Extension
 
     public function populateDefaults()
     {
-        $width = $this->owner->config()->get('width');
+        $width = $this->getOwner()->config()->get('width');
         $width = reset($width);
 
-        $this->owner->Width = $width;
+        $this->getOwner()->Width = $width;
 
         parent::populateDefaults();
     }

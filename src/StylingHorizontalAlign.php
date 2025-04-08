@@ -32,14 +32,14 @@ class StylingHorizontalAlign extends \SilverStripe\Core\Extension
 
     public function getStylingHorizontalAlignNice($key)
     {
-        return (!empty($this->owner->config()->get('horalign')[$key])) ? $this->owner->config()->get('horalign')[$key] : $key;
+        return (!empty($this->getOwner()->config()->get('horalign')[$key])) ? $this->getOwner()->config()->get('horalign')[$key] : $key;
     }
 
     public function getStylingHorizontalAlignData()
     {
         return \SilverStripe\Model\ArrayData::create([
                'Label' => self::$singular_name,
-               'Value' => $this->getStylingHorizontalAlignNice($this->owner->HorAlign),
+               'Value' => $this->getStylingHorizontalAlignNice($this->getOwner()->HorAlign),
            ]);
     }
 
@@ -48,8 +48,8 @@ class StylingHorizontalAlign extends \SilverStripe\Core\Extension
      */
     public function getHorAlignVariant()
     {
-        $horalign = $this->owner->HorAlign;
-        $horaligns = $this->owner->config()->get('horalign');
+        $horalign = $this->getOwner()->HorAlign;
+        $horaligns = $this->getOwner()->config()->get('horalign');
 
         if (isset($horaligns[$horalign])) {
             $horalign = strtolower($horalign);
@@ -63,7 +63,7 @@ class StylingHorizontalAlign extends \SilverStripe\Core\Extension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName('HorAlign');
-        $horalign = $this->owner->config()->get('horalign');
+        $horalign = $this->getOwner()->config()->get('horalign');
         if ($horalign && count($horalign) > 1) {
             $fields->addFieldsToTab(
                 'Root.Styling',
@@ -76,10 +76,10 @@ class StylingHorizontalAlign extends \SilverStripe\Core\Extension
 
     public function populateDefaults()
     {
-        $horalign = $this->owner->config()->get('horalign');
+        $horalign = $this->getOwner()->config()->get('horalign');
         $horalign = key($horalign);
 
-        $this->owner->HorAlign = $horalign;
+        $this->getOwner()->HorAlign = $horalign;
 
         parent::populateDefaults();
     }

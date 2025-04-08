@@ -32,14 +32,14 @@ class StylingLimit extends \SilverStripe\Core\Extension
 
     public function getStylingLimitNice($key)
     {
-        return (!empty($this->owner->config()->get('limit')[$key])) ? $this->owner->config()->get('limit')[$key] : $key;
+        return (!empty($this->getOwner()->config()->get('limit')[$key])) ? $this->getOwner()->config()->get('limit')[$key] : $key;
     }
 
     public function getStylingLimitData()
     {
         return \SilverStripe\Model\ArrayData::create([
            'Label' => self::$singular_name,
-           'Value' => $this->getStylingLimitNice($this->owner->Limit),
+           'Value' => $this->getStylingLimitNice($this->getOwner()->Limit),
        ]);
     }
 
@@ -48,8 +48,8 @@ class StylingLimit extends \SilverStripe\Core\Extension
      */
     public function getLimitVariant()
     {
-        $limit = $this->owner->Limit;
-        $limits = $this->owner->config()->get('limit');
+        $limit = $this->getOwner()->Limit;
+        $limits = $this->getOwner()->config()->get('limit');
 
         if (isset($limits[$limit])) {
             $limit = strtolower($limit);
@@ -62,7 +62,7 @@ class StylingLimit extends \SilverStripe\Core\Extension
 
     public function updateCMSFields(FieldList $fields)
     {
-        $limit = $this->owner->config()->get('limit');
+        $limit = $this->getOwner()->config()->get('limit');
         if ($limit && count($limit) > 1) {
             $fields->addFieldsToTab('Root.Styling', DropdownField::create('Limit', _t(__CLASS__.'.LIMIT', 'Limit'), $limit));
         } else {
@@ -74,10 +74,10 @@ class StylingLimit extends \SilverStripe\Core\Extension
 
     public function populateDefaults()
     {
-        $limit = $this->owner->config()->get('limit');
+        $limit = $this->getOwner()->config()->get('limit');
         $limit = reset($limit);
 
-        $this->owner->Limit = $limit;
+        $this->getOwner()->Limit = $limit;
 
         parent::populateDefaults();
     }

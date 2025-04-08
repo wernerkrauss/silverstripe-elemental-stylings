@@ -32,14 +32,14 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
 
     public function getStylingTextAlignNice($key)
     {
-        return (!empty($this->owner->config()->get('textalign')[$key])) ? $this->owner->config()->get('textalign')[$key] : $key;
+        return (!empty($this->getOwner()->config()->get('textalign')[$key])) ? $this->getOwner()->config()->get('textalign')[$key] : $key;
     }
 
     public function getStylingTextAlignData()
     {
         return \SilverStripe\Model\ArrayData::create([
                'Label' => self::$singular_name,
-               'Value' => $this->getStylingTextAlignNice($this->owner->TextAlign),
+               'Value' => $this->getStylingTextAlignNice($this->getOwner()->TextAlign),
            ]);
     }
 
@@ -48,8 +48,8 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
      */
     public function getTextAlignVariant()
     {
-        $textalign = $this->owner->TextAlign;
-        $textaligns = $this->owner->config()->get('textalign');
+        $textalign = $this->getOwner()->TextAlign;
+        $textaligns = $this->getOwner()->config()->get('textalign');
 
         if (isset($textaligns[$textalign])) {
             $textalign = strtolower($textalign);
@@ -63,7 +63,7 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName('TextAlign');
-        $textalign = $this->owner->config()->get('textalign');
+        $textalign = $this->getOwner()->config()->get('textalign');
         if ($textalign && count($textalign) > 1) {
             $fields->addFieldsToTab(
                 'Root.Styling',
@@ -76,10 +76,10 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
 
     public function populateDefaults()
     {
-        $textalign = $this->owner->config()->get('textalign');
+        $textalign = $this->getOwner()->config()->get('textalign');
         $textalign = key($textalign);
 
-        $this->owner->TextAlign = $textalign;
+        $this->getOwner()->TextAlign = $textalign;
 
         parent::populateDefaults();
     }

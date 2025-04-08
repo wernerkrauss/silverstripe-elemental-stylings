@@ -32,14 +32,14 @@ class StylingVerticalAlign extends \SilverStripe\Core\Extension
 
     public function getStylingVerticalAlignNice($key)
     {
-        return (!empty($this->owner->config()->get('veralign')[$key])) ? $this->owner->config()->get('veralign')[$key] : $key;
+        return (!empty($this->getOwner()->config()->get('veralign')[$key])) ? $this->getOwner()->config()->get('veralign')[$key] : $key;
     }
 
     public function getStylingVerticalAlignData()
     {
         return \SilverStripe\Model\ArrayData::create([
            'Label' => self::$singular_name,
-           'Value' => $this->getStylingVerticalAlignNice($this->owner->VerAlign),
+           'Value' => $this->getStylingVerticalAlignNice($this->getOwner()->VerAlign),
        ]);
     }
 
@@ -48,8 +48,8 @@ class StylingVerticalAlign extends \SilverStripe\Core\Extension
      */
     public function getVerAlignVariant()
     {
-        $veralign = $this->owner->VerAlign;
-        $veraligns = $this->owner->config()->get('veralign');
+        $veralign = $this->getOwner()->VerAlign;
+        $veraligns = $this->getOwner()->config()->get('veralign');
 
         if (isset($veraligns[$veralign])) {
             $veralign = strtolower($veralign);
@@ -63,7 +63,7 @@ class StylingVerticalAlign extends \SilverStripe\Core\Extension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName('VerAlign');
-        $veralign = $this->owner->config()->get('veralign');
+        $veralign = $this->getOwner()->config()->get('veralign');
         if ($veralign && count($veralign) > 1) {
             $fields->addFieldsToTab(
                 'Root.Styling',
@@ -76,14 +76,14 @@ class StylingVerticalAlign extends \SilverStripe\Core\Extension
 
     public function populateDefaults()
     {
-        if ($this->owner->config()->get('stop_veralign_inheritance')) {
-            $veralign = $this->owner->config()->get('veralign', Config::UNINHERITED);
+        if ($this->getOwner()->config()->get('stop_veralign_inheritance')) {
+            $veralign = $this->getOwner()->config()->get('veralign', Config::UNINHERITED);
         } else {
-            $veralign = $this->owner->config()->get('veralign');
+            $veralign = $this->getOwner()->config()->get('veralign');
         }
 
         $veralign = key($veralign);
-        $this->owner->VerAlign = $veralign;
+        $this->getOwner()->VerAlign = $veralign;
 
         parent::populateDefaults();
     }

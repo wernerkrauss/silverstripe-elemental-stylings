@@ -32,14 +32,14 @@ class StylingSize extends \SilverStripe\Core\Extension
 
     public function getStylingSizeNice($key)
     {
-        return (!empty($this->owner->config()->get('size')[$key])) ? $this->owner->config()->get('size')[$key] : $key;
+        return (!empty($this->getOwner()->config()->get('size')[$key])) ? $this->getOwner()->config()->get('size')[$key] : $key;
     }
 
     public function getStylingSizeData()
     {
         return \SilverStripe\Model\ArrayData::create([
            'Label' => self::$singular_name,
-           'Value' => $this->getStylingSizeNice($this->owner->Size),
+           'Value' => $this->getStylingSizeNice($this->getOwner()->Size),
        ]);
     }
 
@@ -48,8 +48,8 @@ class StylingSize extends \SilverStripe\Core\Extension
      */
     public function getSizeVariant()
     {
-        $size = $this->owner->Size;
-        $sizes = $this->owner->config()->get('size');
+        $size = $this->getOwner()->Size;
+        $sizes = $this->getOwner()->config()->get('size');
 
         if (isset($sizes[$size])) {
             $size = strtolower($size);
@@ -62,7 +62,7 @@ class StylingSize extends \SilverStripe\Core\Extension
 
     public function updateCMSFields(FieldList $fields)
     {
-        $size = $this->owner->config()->get('size');
+        $size = $this->getOwner()->config()->get('size');
         if ($size && count($size) > 1) {
             $fields->addFieldsToTab('Root.Styling', DropdownField::create('Size', _t(__CLASS__.'.SIZE', 'Size'), $size));
         } else {
@@ -74,10 +74,10 @@ class StylingSize extends \SilverStripe\Core\Extension
 
     public function populateDefaults()
     {
-        $size = $this->owner->config()->get('size');
+        $size = $this->getOwner()->config()->get('size');
         $size = reset($size);
 
-        $this->owner->Size = $size;
+        $this->getOwner()->Size = $size;
 
         parent::populateDefaults();
     }
