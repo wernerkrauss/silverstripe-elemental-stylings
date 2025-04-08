@@ -10,17 +10,22 @@ use SilverStripe\Model\ArrayData;
 
 class StylingVerticalAlign extends Extension
 {
+    /**
+     * @config
+     */
     private static array $db = [
         'VerAlign' => 'Varchar(255)',
     ];
 
     /**
      * @var string
+     * @config
      */
     private static string $singular_name = 'Vertical Align';
 
     /**
      * @var string
+     * @config
      */
     private static string $plural_name = 'Vertical Aligns';
 

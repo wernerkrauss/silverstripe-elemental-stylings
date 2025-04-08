@@ -10,17 +10,22 @@ use SilverStripe\Model\ArrayData;
 
 class StylingHeight extends Extension
 {
+    /**
+     * @config
+     */
     private static array $db = [
         'Height' => 'Varchar(255)',
     ];
 
     /**
      * @var string
+     * @config
      */
     private static string $singular_name = 'Height';
 
     /**
      * @var string
+     * @config
      */
     private static string $plural_name = 'Heights';
 

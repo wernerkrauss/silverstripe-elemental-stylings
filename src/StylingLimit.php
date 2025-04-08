@@ -9,17 +9,22 @@ use SilverStripe\Model\ArrayData;
 
 class StylingLimit extends Extension
 {
+    /**
+     * @config
+     */
     private static array $db = [
         'Limit' => 'Varchar(255)',
     ];
 
     /**
      * @var string
+     * @config
      */
     private static string $singular_name = 'Limit';
 
     /**
      * @var string
+     * @config
      */
     private static string $plural_name = 'Limits';
 

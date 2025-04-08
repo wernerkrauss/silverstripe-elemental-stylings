@@ -10,17 +10,22 @@ use SilverStripe\Model\ArrayData;
 
 class StylingWidth extends Extension
 {
+    /**
+     * @config
+     */
     private static array $db = [
         'Width' => 'Varchar(255)',
     ];
 
     /**
      * @var string
+     * @config
      */
     private static string $singular_name = 'Width';
 
     /**
      * @var string
+     * @config
      */
     private static string $plural_name = 'Widths';
 

@@ -12,11 +12,13 @@ class StylingStyle extends Extension
 {
     /**
      * @var string
+     * @config
      */
     private static string $singular_name = 'Style';
 
     /**
      * @var string
+     * @config
      */
     private static string $plural_name = 'Styles';
 

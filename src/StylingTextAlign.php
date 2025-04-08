@@ -10,17 +10,22 @@ use SilverStripe\Model\ArrayData;
 
 class StylingTextAlign extends Extension
 {
+    /**
+     * @config
+     */
     private static array $db = [
         'TextAlign' => 'Varchar(255)',
     ];
 
     /**
      * @var string
+     * @config
      */
     private static string $singular_name = 'Text Align';
 
     /**
      * @var string
+     * @config
      */
     private static string $plural_name = 'Text Aligns';
 

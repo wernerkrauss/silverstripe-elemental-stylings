@@ -10,17 +10,22 @@ use SilverStripe\Model\ArrayData;
 
 class StylingHorizontalAlign extends Extension
 {
+    /**
+     * @config
+     */
     private static array $db = [
         'HorAlign' => 'Varchar(255)',
     ];
 
     /**
      * @var string
+     * @config
      */
     private static string $singular_name = 'Horizontal Align';
 
     /**
      * @var string
+     * @config
      */
     private static string $plural_name = 'Horizontal Aligns';
 

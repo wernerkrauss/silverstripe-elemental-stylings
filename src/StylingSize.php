@@ -10,17 +10,22 @@ use SilverStripe\Model\ArrayData;
 
 class StylingSize extends Extension
 {
+    /**
+     * @config
+     */
     private static array $db = [
         'Size' => 'Varchar(255)',
     ];
 
     /**
      * @var string
+     * @config
      */
     private static string $singular_name = 'Size';
 
     /**
      * @var string
+     * @config
      */
     private static string $plural_name = 'Sizes';
 
