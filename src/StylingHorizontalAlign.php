@@ -37,7 +37,7 @@ class StylingHorizontalAlign extends \SilverStripe\Core\Extension
 
     public function getStylingHorizontalAlignData()
     {
-        return ArrayData::create([
+        return \SilverStripe\Model\ArrayData::create([
                'Label' => self::$singular_name,
                'Value' => $this->getStylingHorizontalAlignNice($this->owner->HorAlign),
            ]);

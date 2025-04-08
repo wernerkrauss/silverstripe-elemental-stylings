@@ -33,7 +33,7 @@ class StylingStyle extends \SilverStripe\Core\Extension
 
     public function getStylingStyleData()
     {
-        return ArrayData::create([
+        return \SilverStripe\Model\ArrayData::create([
                'Label' => self::$singular_name,
                'Value' => $this->getStylingStyleNice($this->owner->Style),
            ]);
@@ -41,7 +41,7 @@ class StylingStyle extends \SilverStripe\Core\Extension
 
     public function getStylingTitleData()
     {
-        return ArrayData::create([
+        return \SilverStripe\Model\ArrayData::create([
                'Label' => 'Title',
                'Value' => $this->owner->obj('ShowTitle')->Nice(),
            ]);

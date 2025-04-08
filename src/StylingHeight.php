@@ -38,7 +38,7 @@ class StylingHeight extends \SilverStripe\Core\Extension
 
     public function getStylingHeightData()
     {
-        return ArrayData::create([
+        return \SilverStripe\Model\ArrayData::create([
            'Label' => self::$singular_name,
            'Value' => $this->getStylingHeightNice($this->owner->Height),
        ]);

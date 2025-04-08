@@ -37,7 +37,7 @@ class StylingLimit extends \SilverStripe\Core\Extension
 
     public function getStylingLimitData()
     {
-        return ArrayData::create([
+        return \SilverStripe\Model\ArrayData::create([
            'Label' => self::$singular_name,
            'Value' => $this->getStylingLimitNice($this->owner->Limit),
        ]);

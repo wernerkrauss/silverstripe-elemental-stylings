@@ -37,7 +37,7 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
 
     public function getStylingTextAlignData()
     {
-        return ArrayData::create([
+        return \SilverStripe\Model\ArrayData::create([
                'Label' => self::$singular_name,
                'Value' => $this->getStylingTextAlignNice($this->owner->TextAlign),
            ]);

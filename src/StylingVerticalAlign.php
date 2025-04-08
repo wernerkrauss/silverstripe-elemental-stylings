@@ -37,7 +37,7 @@ class StylingVerticalAlign extends \SilverStripe\Core\Extension
 
     public function getStylingVerticalAlignData()
     {
-        return ArrayData::create([
+        return \SilverStripe\Model\ArrayData::create([
            'Label' => self::$singular_name,
            'Value' => $this->getStylingVerticalAlignNice($this->owner->VerAlign),
        ]);
