@@ -67,7 +67,7 @@ class StylingVerticalAlign extends \SilverStripe\Core\Extension
         if ($veralign && count($veralign) > 1) {
             $fields->addFieldsToTab(
                 'Root.Styling',
-                StylingOptionsetField::create('VerAlign', _t(__CLASS__.'.VERTICALALIGN', 'Vertical Align'), $veralign)
+                StylingOptionsetField::create('VerAlign', _t(self::class.'.VERTICALALIGN', 'Vertical Align'), $veralign)
             );
         }
 
@@ -84,7 +84,5 @@ class StylingVerticalAlign extends \SilverStripe\Core\Extension
 
         $veralign = key($veralign);
         $this->getOwner()->VerAlign = $veralign;
-
-        parent::populateDefaults();
     }
 }

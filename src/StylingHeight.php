@@ -65,7 +65,7 @@ class StylingHeight extends \SilverStripe\Core\Extension
     {
         $height = $this->getOwner()->config()->get('height');
         if ($height && count($height) > 1) {
-            $fields->addFieldsToTab('Root.Styling', StylingOptionsetField::create('Height', _t(__CLASS__.'.HEIGHT', 'Height Size'), $height));
+            $fields->addFieldsToTab('Root.Styling', StylingOptionsetField::create('Height', _t(self::class.'.HEIGHT', 'Height Size'), $height));
         } else {
             $fields->removeByName('Height');
         }
@@ -79,7 +79,5 @@ class StylingHeight extends \SilverStripe\Core\Extension
         $height = reset($height);
 
         $this->getOwner()->Height = $height;
-
-        parent::populateDefaults();
     }
 }

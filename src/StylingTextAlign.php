@@ -67,7 +67,7 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
         if ($textalign && count($textalign) > 1) {
             $fields->addFieldsToTab(
                 'Root.Styling',
-                StylingOptionsetField::create('TextAlign', _t(__CLASS__.'.TEXTALIGN', 'Text Align'), $textalign)
+                StylingOptionsetField::create('TextAlign', _t(self::class.'.TEXTALIGN', 'Text Align'), $textalign)
             );
         }
 
@@ -80,7 +80,5 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
         $textalign = key($textalign);
 
         $this->getOwner()->TextAlign = $textalign;
-
-        parent::populateDefaults();
     }
 }

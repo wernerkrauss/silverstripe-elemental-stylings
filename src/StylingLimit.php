@@ -64,7 +64,7 @@ class StylingLimit extends \SilverStripe\Core\Extension
     {
         $limit = $this->getOwner()->config()->get('limit');
         if ($limit && count($limit) > 1) {
-            $fields->addFieldsToTab('Root.Styling', DropdownField::create('Limit', _t(__CLASS__.'.LIMIT', 'Limit'), $limit));
+            $fields->addFieldsToTab('Root.Styling', DropdownField::create('Limit', _t(self::class.'.LIMIT', 'Limit'), $limit));
         } else {
             $fields->removeByName('Limit');
         }
@@ -78,7 +78,5 @@ class StylingLimit extends \SilverStripe\Core\Extension
         $limit = reset($limit);
 
         $this->getOwner()->Limit = $limit;
-
-        parent::populateDefaults();
     }
 }

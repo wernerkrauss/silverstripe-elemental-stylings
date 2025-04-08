@@ -53,7 +53,7 @@ class StylingStyle extends \SilverStripe\Core\Extension
     public function updateStyleVariant(&$style)
     {
         if (isset($style)) {
-            $style = strtolower($style);
+            $style = strtolower((string) $style);
         } else {
             $style = '';
         }
@@ -66,7 +66,7 @@ class StylingStyle extends \SilverStripe\Core\Extension
     {
         $style = $this->getOwner()->config()->get('styles');
         if ($style && count($style) > 1) {
-            $fields->addFieldsToTab('Root.Styling', DropdownField::create('Style', _t(__CLASS__.'.STYLE', 'Style'), $style));
+            $fields->addFieldsToTab('Root.Styling', DropdownField::create('Style', _t(self::class.'.STYLE', 'Style'), $style));
         } else {
             $fields->removeByName('Style');
         }
@@ -80,7 +80,5 @@ class StylingStyle extends \SilverStripe\Core\Extension
         $style = array_key_first($style);
 
         $this->getOwner()->Style = $style;
-
-        parent::populateDefaults();
     }
 }

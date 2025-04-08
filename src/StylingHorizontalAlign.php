@@ -67,7 +67,7 @@ class StylingHorizontalAlign extends \SilverStripe\Core\Extension
         if ($horalign && count($horalign) > 1) {
             $fields->addFieldsToTab(
                 'Root.Styling',
-                StylingOptionsetField::create('HorAlign', _t(__CLASS__.'.HORIZONTALALIGN', 'Horizontal Align'), $horalign)
+                StylingOptionsetField::create('HorAlign', _t(self::class.'.HORIZONTALALIGN', 'Horizontal Align'), $horalign)
             );
         }
 
@@ -80,7 +80,5 @@ class StylingHorizontalAlign extends \SilverStripe\Core\Extension
         $horalign = key($horalign);
 
         $this->getOwner()->HorAlign = $horalign;
-
-        parent::populateDefaults();
     }
 }

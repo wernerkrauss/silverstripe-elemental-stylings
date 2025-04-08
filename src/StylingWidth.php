@@ -65,7 +65,7 @@ class StylingWidth extends \SilverStripe\Core\Extension
     {
         $width = $this->getOwner()->config()->get('width');
         if ($width && count($width) > 1) {
-            $fields->addFieldsToTab('Root.Styling', StylingOptionsetField::create('Width', _t(__CLASS__.'.WIDTH', 'Width Size'), $width));
+            $fields->addFieldsToTab('Root.Styling', StylingOptionsetField::create('Width', _t(self::class.'.WIDTH', 'Width Size'), $width));
         } else {
             $fields->removeByName('Width');
         }
@@ -79,7 +79,5 @@ class StylingWidth extends \SilverStripe\Core\Extension
         $width = reset($width);
 
         $this->getOwner()->Width = $width;
-
-        parent::populateDefaults();
     }
 }

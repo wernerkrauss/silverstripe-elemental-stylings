@@ -9,6 +9,7 @@ use SilverStripe\View\Requirements;
 
 class StylingOptionsetField extends OptionsetField
 {
+    #[\Override]
     public function Field($properties = [])
     {
         $options = [];

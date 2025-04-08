@@ -64,7 +64,7 @@ class StylingSize extends \SilverStripe\Core\Extension
     {
         $size = $this->getOwner()->config()->get('size');
         if ($size && count($size) > 1) {
-            $fields->addFieldsToTab('Root.Styling', DropdownField::create('Size', _t(__CLASS__.'.SIZE', 'Size'), $size));
+            $fields->addFieldsToTab('Root.Styling', DropdownField::create('Size', _t(self::class.'.SIZE', 'Size'), $size));
         } else {
             $fields->removeByName('Size');
         }
@@ -78,7 +78,5 @@ class StylingSize extends \SilverStripe\Core\Extension
         $size = reset($size);
 
         $this->getOwner()->Size = $size;
-
-        parent::populateDefaults();
     }
 }
