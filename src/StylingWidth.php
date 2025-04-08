@@ -33,7 +33,7 @@ class StylingWidth extends \SilverStripe\Core\Extension
 
     public function getStylingWidthNice($key)
     {
-        return (!empty($this->getOwner()->config()->get('width')[$key])) ? $this->getOwner()->config()->get('width')[$key] : $key;
+        return (empty($this->getOwner()->config()->get('width')[$key])) ? $key : $this->getOwner()->config()->get('width')[$key];
     }
 
     public function getStylingWidthData()
@@ -52,11 +52,7 @@ class StylingWidth extends \SilverStripe\Core\Extension
         $width = $this->getOwner()->Width;
         $widths = $this->getOwner()->config()->get('width');
 
-        if (isset($widths[$width])) {
-            $width = strtolower($width);
-        } else {
-            $width = '';
-        }
+        $width = isset($widths[$width]) ? strtolower($width) : '';
 
         return $width;
     }

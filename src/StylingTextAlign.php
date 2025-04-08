@@ -32,7 +32,7 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
 
     public function getStylingTextAlignNice($key)
     {
-        return (!empty($this->getOwner()->config()->get('textalign')[$key])) ? $this->getOwner()->config()->get('textalign')[$key] : $key;
+        return (empty($this->getOwner()->config()->get('textalign')[$key])) ? $key : $this->getOwner()->config()->get('textalign')[$key];
     }
 
     public function getStylingTextAlignData()
@@ -51,11 +51,7 @@ class StylingTextAlign extends \SilverStripe\Core\Extension
         $textalign = $this->getOwner()->TextAlign;
         $textaligns = $this->getOwner()->config()->get('textalign');
 
-        if (isset($textaligns[$textalign])) {
-            $textalign = strtolower($textalign);
-        } else {
-            $textalign = '';
-        }
+        $textalign = isset($textaligns[$textalign]) ? strtolower($textalign) : '';
 
         return 'textalign-'.$textalign;
     }

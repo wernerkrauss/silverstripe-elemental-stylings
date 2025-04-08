@@ -28,7 +28,7 @@ class StylingStyle extends \SilverStripe\Core\Extension
 
     public function getStylingStyleNice($key)
     {
-        return (!empty($this->getOwner()->config()->get('styles')[$key])) ? $this->getOwner()->config()->get('styles')[$key] : $key;
+        return (empty($this->getOwner()->config()->get('styles')[$key])) ? $key : $this->getOwner()->config()->get('styles')[$key];
     }
 
     public function getStylingStyleData()
@@ -52,11 +52,7 @@ class StylingStyle extends \SilverStripe\Core\Extension
      */
     public function updateStyleVariant(&$style)
     {
-        if (isset($style)) {
-            $style = strtolower((string) $style);
-        } else {
-            $style = '';
-        }
+        $style = isset($style) ? strtolower((string) $style) : '';
         $style = 'style-'.$style;
 
         return $style;

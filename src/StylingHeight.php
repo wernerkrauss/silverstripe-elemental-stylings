@@ -33,7 +33,7 @@ class StylingHeight extends \SilverStripe\Core\Extension
 
     public function getStylingHeightNice($key)
     {
-        return (!empty($this->getOwner()->config()->get('height')[$key])) ? $this->getOwner()->config()->get('height')[$key] : $key;
+        return (empty($this->getOwner()->config()->get('height')[$key])) ? $key : $this->getOwner()->config()->get('height')[$key];
     }
 
     public function getStylingHeightData()
@@ -52,11 +52,7 @@ class StylingHeight extends \SilverStripe\Core\Extension
         $height = $this->getOwner()->Height;
         $heights = $this->getOwner()->config()->get('height');
 
-        if (isset($heights[$height])) {
-            $height = strtolower($height);
-        } else {
-            $height = '';
-        }
+        $height = isset($heights[$height]) ? strtolower($height) : '';
 
         return 'height-'.$height;
     }

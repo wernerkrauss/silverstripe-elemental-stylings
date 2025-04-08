@@ -32,7 +32,7 @@ class StylingHorizontalAlign extends \SilverStripe\Core\Extension
 
     public function getStylingHorizontalAlignNice($key)
     {
-        return (!empty($this->getOwner()->config()->get('horalign')[$key])) ? $this->getOwner()->config()->get('horalign')[$key] : $key;
+        return (empty($this->getOwner()->config()->get('horalign')[$key])) ? $key : $this->getOwner()->config()->get('horalign')[$key];
     }
 
     public function getStylingHorizontalAlignData()
@@ -51,11 +51,7 @@ class StylingHorizontalAlign extends \SilverStripe\Core\Extension
         $horalign = $this->getOwner()->HorAlign;
         $horaligns = $this->getOwner()->config()->get('horalign');
 
-        if (isset($horaligns[$horalign])) {
-            $horalign = strtolower($horalign);
-        } else {
-            $horalign = '';
-        }
+        $horalign = isset($horaligns[$horalign]) ? strtolower($horalign) : '';
 
         return 'horalign-'.$horalign;
     }

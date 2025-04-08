@@ -32,7 +32,7 @@ class StylingSize extends \SilverStripe\Core\Extension
 
     public function getStylingSizeNice($key)
     {
-        return (!empty($this->getOwner()->config()->get('size')[$key])) ? $this->getOwner()->config()->get('size')[$key] : $key;
+        return (empty($this->getOwner()->config()->get('size')[$key])) ? $key : $this->getOwner()->config()->get('size')[$key];
     }
 
     public function getStylingSizeData()
@@ -51,11 +51,7 @@ class StylingSize extends \SilverStripe\Core\Extension
         $size = $this->getOwner()->Size;
         $sizes = $this->getOwner()->config()->get('size');
 
-        if (isset($sizes[$size])) {
-            $size = strtolower($size);
-        } else {
-            $size = '';
-        }
+        $size = isset($sizes[$size]) ? strtolower($size) : '';
 
         return 'size-'.$size;
     }

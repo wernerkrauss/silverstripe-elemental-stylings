@@ -32,7 +32,7 @@ class StylingLimit extends \SilverStripe\Core\Extension
 
     public function getStylingLimitNice($key)
     {
-        return (!empty($this->getOwner()->config()->get('limit')[$key])) ? $this->getOwner()->config()->get('limit')[$key] : $key;
+        return (empty($this->getOwner()->config()->get('limit')[$key])) ? $key : $this->getOwner()->config()->get('limit')[$key];
     }
 
     public function getStylingLimitData()
@@ -51,11 +51,7 @@ class StylingLimit extends \SilverStripe\Core\Extension
         $limit = $this->getOwner()->Limit;
         $limits = $this->getOwner()->config()->get('limit');
 
-        if (isset($limits[$limit])) {
-            $limit = strtolower($limit);
-        } else {
-            $limit = '';
-        }
+        $limit = isset($limits[$limit]) ? strtolower($limit) : '';
 
         return 'limit-'.$limit;
     }

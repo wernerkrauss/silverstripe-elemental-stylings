@@ -32,7 +32,7 @@ class StylingVerticalAlign extends \SilverStripe\Core\Extension
 
     public function getStylingVerticalAlignNice($key)
     {
-        return (!empty($this->getOwner()->config()->get('veralign')[$key])) ? $this->getOwner()->config()->get('veralign')[$key] : $key;
+        return (empty($this->getOwner()->config()->get('veralign')[$key])) ? $key : $this->getOwner()->config()->get('veralign')[$key];
     }
 
     public function getStylingVerticalAlignData()
@@ -51,11 +51,7 @@ class StylingVerticalAlign extends \SilverStripe\Core\Extension
         $veralign = $this->getOwner()->VerAlign;
         $veraligns = $this->getOwner()->config()->get('veralign');
 
-        if (isset($veraligns[$veralign])) {
-            $veralign = strtolower($veralign);
-        } else {
-            $veralign = '';
-        }
+        $veralign = isset($veraligns[$veralign]) ? strtolower($veralign) : '';
 
         return 'veralign-'.$veralign;
     }
